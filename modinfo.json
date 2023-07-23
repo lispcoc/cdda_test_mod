@@ -1,0 +1,54 @@
+[
+  {
+    "type": "MOD_INFO",
+    "ident": "debug_testtest",
+    "name": "debug_testtest",
+    "authors": [ "YasuYasu" ],
+    "description": "Magiclysmのアドオンで、魔法の銃や魔法アクセサリなど魔法使いをサポートするアイテムを追加します。このmodのアイテムはアイテム名の末尾に[MWA]と付きます",
+    "category": "content",
+    "dependencies": [ "dda" ]
+  },
+  {
+    "type": "SPELL",
+    "id": "spell_testtest",
+    "name": { "str": "testtest" },
+    "description": "You debugged in this spell!  It makes you evil for 30 minutes.",
+    "valid_targets": [ "hostile", "ally", "self" ],
+    "flags": [ "NO_PROJECTILE" ],
+    "shape": "blast",
+    "min_range": 10,
+    "effect": "effect_on_condition",
+    "effect_str": "EOC_spell_testtest"
+  },
+  {
+    "id": "TALK_SHELTER",
+    "type": "talk_topic",
+    "dynamic_line": [ "Well, I guess it's just us.", "At least we've got shelter." ],
+    "responses": [
+      { "text": "testtest", "topic": "TALK_TEST_TOPIC_ITEM_MUTATOR" },
+      {
+        "text": "testtesttest",
+        "topic": "TALK_DONE",
+        "effect": { "arithmetic": [ { "global_val": "var", "var_name": "hp" }, "=", { "u_val": "hp_max", "bodypart": "head" } ] }
+      },
+      { "text": "What should we do now?", "topic": "TALK_SHELTER_PLANS" },
+      { "text": "Any tips?", "topic": "TALK_SHELTER_ADVICE" },
+      { "text": "Can I do anything for you?", "topic": "TALK_MISSION_LIST" },
+      { "text": "Want to travel with me?", "topic": "TALK_SUGGEST_FOLLOW", "condition": { "not": "npc_following" } },
+      {
+        "text": "Let's trade items.",
+        "condition": { "npc_has_trait": "NPC_STARTING_NPC" },
+        "topic": "TALK_SHELTER",
+        "effect": "start_trade"
+      },
+      {
+        "text": "Let's trade items.",
+        "condition": { "not": { "npc_has_trait": "NPC_STARTING_NPC" } },
+        "topic": "TALK_NONE",
+        "effect": "start_trade"
+      },
+      { "text": "Want to share some useful items with me?", "topic": "TALK_SHARE_EQUIPMENT" },
+      { "text": "Well, bye.", "topic": "TALK_DONE" }
+    ]
+  }
+]
